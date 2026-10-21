@@ -660,7 +660,12 @@ footer{padding:40px 0 48px;font-size:.92rem;color:var(--ink-2)}
         if (msg && !first) first = el;
       });
       const ok = document.getElementById('f-ok');
-      if (first) { ok.textContent = ''; first.focus(); return; }
+      if (first) {
+        ok.textContent = '';
+        if (smoother) { first.focus({ preventScroll: true }); smoother.scrollTo(first, true, 'center center'); }
+        else first.focus();
+        return;
+      }
       const name = document.getElementById('f-name').value.trim().split(' ')[0];
       ok.textContent = `Hvala, ${name}! Javićemo vam se u toku radnog vremena.`;
       form.reset();
