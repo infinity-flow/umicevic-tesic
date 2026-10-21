@@ -110,7 +110,8 @@ footer .wordmark{height:26px}
 /* Fear meter */
 /* Everything after the hero scrolls over it */
 main > :where(section:not(.hero)){position:relative;z-index:1;background:var(--paper)}
-main > .fear{box-shadow:0 -24px 48px -24px rgba(29,43,42,.18)}
+/* only the dark box slides over the hero; the lower half (hidden behind the box) covers it for the next sections */
+main > .fear{background:linear-gradient(to bottom,transparent 50%,var(--paper) 50%)}
 .fear{color:#E9F3F1;padding:clamp(24px,3vw,48px) 0}
 .fear-box{background:var(--ink);border-radius:clamp(20px,2.4vw,36px);padding:clamp(40px,6vw,96px) clamp(24px,5vw,80px)}
 .fear-grid{display:grid;grid-template-columns:minmax(0,.9fr) minmax(0,1.1fr);gap:clamp(40px,6vw,96px);align-items:start}
