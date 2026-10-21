@@ -239,8 +239,10 @@ main > .fear{background:linear-gradient(to bottom,transparent 50%,var(--paper) 5
 .hours td:last-child{text-align:right;font-weight:700;white-space:nowrap}
 .hours tr.off td:last-child{color:var(--muted);font-weight:500}
 .hours tr.today td:first-child::after{content:"danas";margin-left:10px;padding:2px 9px;border-radius:999px;background:var(--orchid);color:#fff;font-size:.75rem;font-weight:700;vertical-align:2px}
-.hours .addr{margin-top:20px;display:grid;gap:4px}
-.hours .addr a{font-weight:700}
+.hours .addr{margin-top:20px}
+.hours .addr a{display:inline-flex;align-items:center;gap:8px;font-weight:700}
+.hours .addr svg{width:20px;height:20px;flex:none;color:var(--deep)}
+.hours .every{color:var(--muted);font-size:.9rem}
 .hours .note{margin-top:12px;font-size:.88rem;color:var(--ink-2)}
 
 /* Footer */
@@ -480,12 +482,11 @@ footer{padding:40px 0 48px;font-size:.92rem;color:var(--ink-2)}
           <tr data-d="1"><td>Ponedeljak</td><td>13:00 – 20:00</td></tr>
           <tr data-d="2 3 4"><td>Utorak – četvrtak</td><td>09:00 – 20:00</td></tr>
           <tr data-d="5"><td>Petak</td><td>13:00 – 20:00</td></tr>
-          <tr data-d="6"><td>Subota</td><td>09:00 – 13:00</td></tr>
+          <tr data-d="6"><td>Subota <span class="every">(svaka druga)</span></td><td>09:00 – 13:00</td></tr>
           <tr data-d="0" class="off"><td>Nedelja</td><td>Ne radimo</td></tr>
         </tbody>
       </table>
-      <p class="note">Subotom radimo svake druge nedelje. Pozovite da proverite.</p>
-      <p class="addr"><a href="https://goo.gl/maps/UCyBxss5A39khUE76" target="_blank" rel="noopener">Petra Dobrovića 18a, Novi Sad</a><span>Klisa, otvori u mapama</span></p>
+      <p class="addr"><a href="https://goo.gl/maps/UCyBxss5A39khUE76" target="_blank" rel="noopener" aria-label="Petra Dobrovića 18a, Novi Sad (otvara mapu)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 22s7-6.2 7-12a7 7 0 1 0-14 0c0 5.8 7 12 7 12z"/><circle cx="12" cy="10" r="2.5"/></svg>Petra Dobrovića 18a, Novi Sad</a></p>
     </div>
   </div>
 </section>
