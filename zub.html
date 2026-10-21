@@ -871,7 +871,7 @@ footer{padding:40px 0 48px;font-size:.92rem;color:var(--ink-2)}
   let angle = -0.35, visible = true, last = performance.now();
   new IntersectionObserver(([e]) => { visible = e.isIntersecting; if (visible) requestAnimationFrame(frame); }).observe(canvas);
 
-  const F = 1100, R = 110, PUSH = 46;
+  const F = 1100, R = 140, PUSH = 64;
   function frame(now) {
     if (!visible) return;
     const dt = Math.min(48, now - last); last = now;
