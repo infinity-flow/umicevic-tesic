@@ -797,6 +797,30 @@ footer a:not(.btn):hover{color:var(--deep)}
   };
   Promise.race([fontsReady, new Promise(r => setTimeout(r, 1500))]).then(showHero, showHero);
 
+  // Sections reveal once as they scroll into view (GSAP ScrollTrigger)
+  if (window.gsap && window.ScrollTrigger && !matchMedia('(prefers-reduced-motion: reduce)').matches) {
+    gsap.registerPlugin(ScrollTrigger);
+    const groups = [
+      ['.fear-box', '.fear-box .founder, .fear-box .founder + div > *'],
+      ['#tim', '.team-head > *, .people > li'],
+      ['#usluge', '.svc-intro > *, .svc-list > li'],
+      ['#ordinacija', '.office-copy > h2, .office-copy > p, .perks > li, .office-photo'],
+      ['#utisci', '#reviews-title, .tslider, .tnav'],
+      ['#kontakt', '.contact-box > div, .contact-box > .hours'],
+      ['#pitanja', '.faq-intro > *, .faq-list > details'],
+      ['footer', '.foot-grid > *, .credit']
+    ];
+    groups.forEach(([trigger, targets]) => {
+      const t = document.querySelector(trigger);
+      const els = gsap.utils.toArray(targets);
+      if (!t || !els.length) return;
+      gsap.from(els, {
+        opacity: 0, y: 36, duration: 0.9, ease: 'power3.out', stagger: 0.08, clearProps: 'transform',
+        scrollTrigger: { trigger: t, start: 'top 82%', once: true }
+      });
+    });
+  }
+
   // Testimonials: GSAP infinite card slider (seamless loop technique from GreenSock's demo)
   (function testimonials() {
     const slider = document.getElementById('tslider');

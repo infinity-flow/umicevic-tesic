@@ -28,4 +28,4 @@ Strana ne prodaje "stomatologiju", nego mir. Sve gradimo od njihovih pravih foto
 
 ## Zabrane
 Bez ALL CAPS natpisa iznad naslova, bez kartica sa senkom za sve, bez strelica u linkovima,
-bez fade-up animacije na svakoj sekciji. Jedan trenutak pokreta: učitavanje hero dela.
+Animacije: hero ulazak jednom pri učitavanju; ostale sekcije se jednom pojave pri skrolu (GSAP ScrollTrigger, po želji klijenta).
