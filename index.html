@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Umićević Tešić | Stomatološka ordinacija, Klisa, Novi Sad</title>
 <meta name="description" content="Stomatološka ordinacija na Klisi u Novom Sadu. Tri doktorke, dve sestre i više od deset godina rada sa pacijentima koji se plaše zubara.">
-<script>document.documentElement.classList.add('js');setTimeout(()=>{const h=document.documentElement;h.classList.add('hero-in');setTimeout(()=>h.classList.add('hero-done'),1600)},2500)</script>
+<script>document.documentElement.classList.add('js');setTimeout(()=>document.documentElement.classList.add('hero-done'),3000)</script>
 <meta name="theme-color" content="#F7F7F7">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -107,20 +107,8 @@ html.has-smoother .hero{position:relative}
   .hero .sub{max-width:40ch}
 }
 
-/* Load moment: runs once, after fonts and the hero pin are ready (html.hero-in) */
-@media (prefers-reduced-motion:no-preference){
-  html.js .hero h1 .ln,html.js .hero .sub,html.js .hero .actions,html.js .hero-stats,html.js .hero-team img{opacity:0}
-  html.js .hero h1 .ln,html.js .hero-team img{transform:translateY(.3em)}
-  html.js .hero-team img{transform:translateY(24px)}
-  html.hero-in .hero h1 .ln{animation:rise .9s cubic-bezier(.16,1,.3,1) forwards}
-  html.hero-in .hero h1 .ln-2{animation-delay:.1s}
-  html.hero-in .hero .sub,html.hero-in .hero .actions,html.hero-in .hero-stats{animation:fade .8s ease .3s forwards}
-  html.hero-in .hero-team img{animation:rise 1.2s cubic-bezier(.16,1,.3,1) .15s forwards}
-  html.hero-done .hero h1 .ln,html.hero-done .hero .sub,html.hero-done .hero .actions,html.hero-done .hero-stats,html.hero-done .hero-team img{opacity:1;transform:none;animation:none}
-}
-@keyframes rise{to{opacity:1;transform:none}}
-@keyframes fade{to{opacity:1}}
-@keyframes settle{to{transform:none}}
+/* Load moment: hero starts hidden and is revealed once by GSAP (inline styles survive the pin re-wrapping) */
+html.js:not(.hero-done) .hero h1 .ln,html.js:not(.hero-done) .hero .sub,html.js:not(.hero-done) .hero .actions,html.js:not(.hero-done) .hero-stats,html.js:not(.hero-done) .hero-team img{opacity:0}
 
 /* Fear meter */
 /* Everything after the hero scrolls over it */
@@ -787,15 +775,25 @@ footer a:not(.btn):hover{color:var(--deep)}
     });
   };
 
-  // Start the hero entrance once: after web fonts are in and the pin has wrapped the hero
-  const startHero = () => {
+  // Hero entrance: once, after Caslon and Manrope are actually loaded, driven by GSAP
+  const fontsReady = document.fonts
+    ? Promise.all([document.fonts.load('400 64px "Libre Caslon Display"'), document.fonts.load('500 16px "Manrope"')])
+    : Promise.resolve();
+  let heroShown = false;
+  const showHero = () => {
+    if (heroShown) return; heroShown = true;
     const html = document.documentElement;
-    if (html.classList.contains('hero-in')) return;
-    html.classList.add('hero-in');
+    const parts = '.hero h1 .ln, .hero .sub, .hero .actions, .hero-stats, .hero-team img';
+    if (!window.gsap || matchMedia('(prefers-reduced-motion: reduce)').matches) { html.classList.add('hero-done'); return; }
+    gsap.set(parts, { opacity: 0 });
+    html.classList.add('hero-done');
+    gsap.timeline({ defaults: { ease: 'expo.out' } })
+      .fromTo('.hero h1 .ln', { opacity: 0, y: '0.3em' }, { opacity: 1, y: 0, duration: 1, stagger: 0.1 }, 0)
+      .fromTo('.hero-team img', { opacity: 0, y: 24 }, { opacity: 1, y: 0, duration: 1.3 }, 0.15)
+      .to('.hero .sub, .hero .actions, .hero-stats', { opacity: 1, duration: 0.8, ease: 'power1.out' }, 0.3);
     countUp();
-    setTimeout(() => html.classList.add('hero-done'), 1600);
   };
-  Promise.race([document.fonts ? document.fonts.ready : Promise.resolve(), new Promise(r => setTimeout(r, 1200))]).then(startHero);
+  Promise.race([fontsReady, new Promise(r => setTimeout(r, 1500))]).then(showHero, showHero);
 
   // Testimonials: GSAP infinite card slider (seamless loop technique from GreenSock's demo)
   (function testimonials() {
