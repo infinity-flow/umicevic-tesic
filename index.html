@@ -89,6 +89,7 @@ html.has-smoother .hero{position:relative}
 .hero-grid{flex:1;display:grid;grid-template-columns:max-content minmax(0,1fr);grid-template-rows:auto 1fr;column-gap:16px;align-content:start;padding-top:96px;padding-bottom:clamp(40px,6vh,96px)}
 .hero h1{grid-column:1 / -1;grid-row:1;position:relative;z-index:1;font-size:var(--h1);line-height:1.02;letter-spacing:-.015em}
 .hero h1 .ln{display:block;white-space:nowrap}
+.hero h1 .mbr{display:none}
 .hero h1 .ln-2{color:var(--deep)}
 .hero-copy{grid-column:1;grid-row:2;align-self:start;position:relative;z-index:1}
 .hero .sub{margin-top:24px;font-size:1rem;line-height:1.6;color:var(--ink-2);max-width:40ch}
@@ -103,7 +104,8 @@ html.has-smoother .hero{position:relative}
 @media (max-width:759px){
   .hero{min-height:0;--h1:clamp(2.6rem,12vw,3.2rem)}
   .hero h1{line-height:1.04}
-  .hero h1 .ln{white-space:normal}
+  .hero h1 .ln{display:inline;white-space:normal}
+  .hero h1 .mbr{display:inline}
   .hero-grid{grid-template-columns:minmax(0,1fr);padding-top:32px;padding-bottom:56px}
   .hero-team{display:none}
   .hero .sub{max-width:40ch}
@@ -342,7 +344,7 @@ footer a:not(.btn):hover{color:var(--deep)}
 
 <section class="hero" aria-labelledby="hero-title">
   <div class="wrap hero-grid">
-    <h1 id="hero-title"><span class="ln">Ordinacija u kojoj</span> <span class="ln ln-2">strah ostaje na vratima.</span></h1>
+    <h1 id="hero-title"><span class="ln">Ordinacija<br class="mbr"> u kojoj</span> <span class="ln ln-2">strah<br class="mbr"> ostaje na vratima.</span></h1>
     <div class="hero-copy">
       <p class="sub">Naša specijalistička stomatološka ordinacija je posvećena umetnosti bezbolnog, profesionalnog lečenja, sa dugogodišnjim iskustvom u svim oblastima stomatologije.</p>
       <div class="actions">
