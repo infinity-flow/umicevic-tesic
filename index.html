@@ -44,7 +44,9 @@ p{text-wrap:pretty}
 
 /* Header */
 header{position:sticky;top:0;z-index:40;background:rgba(246,250,249,.78);backdrop-filter:blur(16px) saturate(160%);-webkit-backdrop-filter:blur(16px) saturate(160%)}
-header::after{content:"";position:absolute;inset:auto 0 -14px;height:14px;background:linear-gradient(rgba(246,250,249,.6),transparent);pointer-events:none}
+header{transition:transform .35s cubic-bezier(.2,.8,.2,1)}
+header.is-hidden{transform:translateY(-100%)}
+@media (prefers-reduced-motion:reduce){header{transition:none}}
 .bar{display:flex;align-items:center;gap:32px;height:76px}
 .bar .logo{color:var(--ink);display:block}
 .wordmark{display:block;height:34px;width:auto}
@@ -427,6 +429,22 @@ footer{padding:40px 0 48px;font-size:.92rem;color:var(--ink-2)}
   document.querySelectorAll('#hours tr').forEach(tr => {
     if (tr.dataset.d.split(' ').includes(String(d))) tr.classList.add('today');
   });
+
+  // Hide header on scroll down, show on scroll up
+  const header = document.querySelector('header');
+  let lastY = scrollY, ticking = false;
+  const onScroll = () => {
+    const y = scrollY, dy = y - lastY;
+    const menuOpen = document.getElementById('main-nav').classList.contains('open');
+    const focusInside = header.contains(document.activeElement) && document.activeElement !== document.body;
+    if (y < 80 || menuOpen) header.classList.remove('is-hidden');
+    else if (dy > 6 && !focusInside) header.classList.add('is-hidden');
+    else if (dy < -6) header.classList.remove('is-hidden');
+    if (Math.abs(dy) > 6 || y < 80) lastY = y;
+    ticking = false;
+  };
+  addEventListener('scroll', () => { if (!ticking) { ticking = true; requestAnimationFrame(onScroll); } }, { passive: true });
+  header.addEventListener('focusin', () => header.classList.remove('is-hidden'));
 
   // Mobile menu
   const btn = document.querySelector('.menu-btn'), nav = document.getElementById('main-nav');
