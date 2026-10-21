@@ -13,7 +13,7 @@ Strana ne prodaje "stomatologiju", nego mir. Sve gradimo od njihovih pravih foto
 - Orhideja #A23A78 samo za oznaku "danas" i aktivno stanje merača straha
 
 ## Tipografija
-- Fraunces: naslovi (serif, lagan rez 400–500)
+- Libre Caslon Display: naslovi (jedan rez, 400, bez lažnog bolda)
 - Manrope: tekst, dugmad, brojevi i navigacija
 
 ## Raspored
