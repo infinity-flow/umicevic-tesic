@@ -229,19 +229,31 @@ main > .fear{background:linear-gradient(to bottom,transparent 50%,var(--paper) 5
 .contact .big-tel:hover{border-bottom-color:#fff}
 .contact .hours{color:var(--ink)}
 .contact :focus-visible{outline-color:#fff}
-.contact .alt{margin-top:18px;font-size:1rem;color:rgba(255,255,255,.92)}
-.contact .alt a{font-weight:700;white-space:nowrap;color:#fff}
+.cform{display:grid;grid-template-columns:1fr 1fr;gap:16px 16px;margin-top:40px;max-width:640px}
+.cform .full{grid-column:1 / -1}
+.cform label{display:block;margin-bottom:8px;font-weight:700;font-size:.95rem}
+.cform label span{font-weight:500;color:rgba(255,255,255,.75)}
+.cform input,.cform textarea{width:100%;padding:14px 16px;border:2px solid transparent;border-radius:14px;background:rgba(255,255,255,.94);color:var(--ink);font:500 1rem/1.4 var(--text);transition:border-color .2s,background-color .2s}
+.cform textarea{resize:vertical;min-height:120px}
+.cform input::placeholder,.cform textarea::placeholder{color:#7C8C8C}
+.cform input:focus-visible,.cform textarea:focus-visible{outline:none;border-color:#fff;background:#fff;box-shadow:0 0 0 3px rgba(255,255,255,.35)}
+.cform [aria-invalid="true"]{border-color:#FFD2E4}
+.cform .err{margin-top:6px;font-size:.88rem;font-weight:600;color:#FFE3EE;min-height:0}
+.cform .err:empty{display:none}
+.form-foot{display:flex;flex-wrap:wrap;align-items:center;gap:16px;margin-top:8px}
+.form-ok{font-weight:600}
+@media (max-width:560px){.cform{grid-template-columns:1fr}}
 @media (max-width:880px){.contact-grid{grid-template-columns:1fr}}
-.hours{background:rgba(255,255,255,.9);border-radius:28px;padding:clamp(24px,3vw,36px)}
-.hours h3{font-size:1.65rem;margin-bottom:8px}
+.hours{background:rgba(255,255,255,.94);border-radius:32px;padding:clamp(28px,3.6vw,52px)}
+.hours h3{font-size:clamp(2rem,2.8vw,2.6rem);margin-bottom:16px}
 .hours table{width:100%;border-collapse:collapse;font-variant-numeric:tabular-nums}
-.hours td{padding:12px 0;border-bottom:1px solid var(--line);font-size:1rem}
+.hours td{padding:18px 0;border-bottom:1px solid var(--line);font-size:1.15rem}
 .hours td:last-child{text-align:right;font-weight:700;white-space:nowrap}
 .hours tr.off td:last-child{color:var(--muted);font-weight:500}
-.hours tr.today td:first-child::after{content:"danas";margin-left:10px;padding:2px 9px;border-radius:999px;background:var(--orchid);color:#fff;font-size:.75rem;font-weight:700;vertical-align:2px}
-.hours .addr{margin-top:20px}
+.hours tr.today td:first-child::after{content:"danas";margin-left:10px;padding:3px 10px;border-radius:999px;background:var(--orchid);color:#fff;font-size:.75rem;font-weight:700;vertical-align:2px}
+.hours .addr{margin-top:28px;font-size:1.1rem}
 .hours .addr a{display:inline-flex;align-items:center;gap:8px;font-weight:700}
-.hours .addr svg{width:20px;height:20px;flex:none;color:var(--deep)}
+.hours .addr svg{width:24px;height:24px;flex:none;color:var(--deep)}
 .hours .every{color:var(--muted);font-size:.9rem}
 
 /* Footer */
@@ -470,9 +482,33 @@ footer{padding:40px 0 48px;font-size:.92rem;color:var(--ink-2)}
 <section class="contact" id="kontakt" aria-labelledby="contact-title">
   <div class="wrap contact-grid">
     <div>
-      <h2 id="contact-title">Zakažite pregled. Ostalo prepustite nama.</h2>
+      <h2 id="contact-title">Zakažite pregled.</h2>
       <a class="big-tel" href="tel:+381638086863">063/808-68-63</a>
-      <p class="alt">Fiksni <a href="tel:+381216413251">021/641-32-51</a> ili mejl <a href="mailto:ordinacija@umicevictesic.com">ordinacija@umicevictesic.com</a></p>
+      <form class="cform" id="cform" novalidate>
+        <div class="field">
+          <label for="f-name">Ime i prezime</label>
+          <input id="f-name" name="ime" type="text" autocomplete="name" required placeholder="npr. Ana Petrović…">
+          <p class="err" id="e-name" aria-live="polite"></p>
+        </div>
+        <div class="field">
+          <label for="f-tel">Telefon</label>
+          <input id="f-tel" name="telefon" type="tel" inputmode="tel" autocomplete="tel" required placeholder="npr. 063 123 4567…">
+          <p class="err" id="e-tel" aria-live="polite"></p>
+        </div>
+        <div class="field full">
+          <label for="f-mail">Email <span>(nije obavezno)</span></label>
+          <input id="f-mail" name="email" type="email" autocomplete="email" spellcheck="false" placeholder="npr. ana@gmail.com…">
+          <p class="err" id="e-mail" aria-live="polite"></p>
+        </div>
+        <div class="field full">
+          <label for="f-msg">Poruka</label>
+          <textarea id="f-msg" name="poruka" rows="4" autocomplete="off" placeholder="Šta vas muči i kada vam odgovara termin…"></textarea>
+        </div>
+        <div class="full form-foot">
+          <button class="btn btn-light" type="submit">Pošaljite upit</button>
+          <p class="form-ok" id="f-ok" role="status" aria-live="polite"></p>
+        </div>
+      </form>
     </div>
     <div class="hours">
       <h3>Radno vreme</h3>
@@ -604,6 +640,32 @@ footer{padding:40px 0 48px;font-size:.92rem;color:var(--ink-2)}
     ans.classList.remove('swap'); void ans.offsetWidth; ans.classList.add('swap');
     ans.innerHTML = `<h3>${a.t}</h3><p>${a.p}</p>`;
   });
+
+  // Contact form (demo: validates inline, nothing is sent yet)
+  const form = document.getElementById('cform');
+  if (form) {
+    const fields = [
+      ['f-name', 'e-name', v => v.trim().length >= 2 || 'Upišite ime i prezime.'],
+      ['f-tel', 'e-tel', v => v.replace(/[^0-9+]/g, '').length >= 8 || 'Upišite broj telefona, npr. 063 123 4567.'],
+      ['f-mail', 'e-mail', v => !v.trim() || /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v.trim()) || 'Proverite email adresu, npr. ana@gmail.com.']
+    ];
+    form.addEventListener('submit', e => {
+      e.preventDefault();
+      let first = null;
+      fields.forEach(([id, eid, test]) => {
+        const el = document.getElementById(id), r = test(el.value), msg = r === true ? '' : r;
+        document.getElementById(eid).textContent = msg;
+        el.setAttribute('aria-invalid', msg ? 'true' : 'false');
+        if (msg) el.setAttribute('aria-describedby', eid); else el.removeAttribute('aria-describedby');
+        if (msg && !first) first = el;
+      });
+      const ok = document.getElementById('f-ok');
+      if (first) { ok.textContent = ''; first.focus(); return; }
+      const name = document.getElementById('f-name').value.trim().split(' ')[0];
+      ok.textContent = `Hvala, ${name}! Javićemo vam se u toku radnog vremena.`;
+      form.reset();
+    });
+  }
 
   // Hero stats: count up once on load
   if (window.gsap && !matchMedia('(prefers-reduced-motion: reduce)').matches) {
