@@ -266,6 +266,12 @@ main > .fear{background:linear-gradient(to bottom,transparent 50%,var(--paper) 5
 .hours .info a{text-decoration:none}
 .hours .info a:hover{text-decoration:underline;text-underline-offset:4px}
 
+/* Phones: blocks that sit inside the margins on desktop go edge to edge */
+@media (max-width:759px){
+  .fear-box,.contact-box{margin-inline:calc(var(--gutter) * -1);border-radius:0;padding:56px var(--gutter)}
+  .fear{padding-top:0}
+}
+
 /* FAQ */
 .faq{padding:var(--space) 0}
 .faq-grid{display:grid;grid-template-columns:minmax(0,.75fr) minmax(0,1.25fr);gap:clamp(32px,6vw,96px);align-items:start}
@@ -654,9 +660,10 @@ footer a:not(.btn):hover{color:var(--deep)}
 
   // Smooth scrolling (GSAP ScrollSmoother, as in GreenSock's smooth-scrolling demo)
   let smoother = null;
-  if (window.gsap && window.ScrollTrigger && window.ScrollSmoother && !matchMedia('(prefers-reduced-motion: reduce)').matches) {
+  // only on desktop with a mouse: on touch devices native scrolling is smoother than any smoothing layer
+  if (window.gsap && window.ScrollTrigger && window.ScrollSmoother && matchMedia('(pointer: fine) and (min-width: 1024px)').matches && !matchMedia('(prefers-reduced-motion: reduce)').matches) {
     gsap.registerPlugin(ScrollTrigger, ScrollSmoother);
-    smoother = ScrollSmoother.create({ wrapper: '#smooth-wrapper', content: '#smooth-content', smooth: 1.2, smoothTouch: 0.1, effects: true });
+    smoother = ScrollSmoother.create({ wrapper: '#smooth-wrapper', content: '#smooth-content', smooth: 1.2, effects: true });
     document.documentElement.classList.add('has-smoother');
     // keep the hero fixed while the rest of the page slides over it
     ScrollTrigger.create({ trigger: '.hero', start: 'top top', endTrigger: '#main', end: 'bottom top', pin: true, pinSpacing: false });
