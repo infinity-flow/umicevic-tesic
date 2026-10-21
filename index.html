@@ -78,14 +78,14 @@ footer .wordmark{height:26px}
 .hero{overflow:hidden}
 .hero-grid{display:grid;grid-template-columns:max-content minmax(0,1fr);column-gap:clamp(24px,3vw,56px);align-items:end;min-height:clamp(460px,44vw,640px)}
 .hero-copy{align-self:center;padding:clamp(32px,4vw,64px) 0 clamp(48px,5vw,80px)}
-.hero h1{font-size:clamp(2.4rem,4.5vw,4.7rem);line-height:1.02;letter-spacing:-.015em}
+.hero h1{font-size:clamp(2.2rem,4.5vw,4.7rem);line-height:1.02;letter-spacing:-.015em}
 .hero h1 .ln{display:block;white-space:nowrap}
 .hero h1 .ln-2{color:var(--deep)}
 .hero .sub{margin-top:24px;font-size:1rem;line-height:1.6;color:var(--ink-2);max-width:40ch}
 .hero .actions{display:flex;flex-wrap:wrap;gap:12px;margin-top:32px}
 .hero-team{align-self:end;justify-self:end;width:100%;max-width:960px;margin:0}
 .hero-team img{width:100%;height:auto;-webkit-mask-image:linear-gradient(to bottom,#000 74%,transparent 99%);mask-image:linear-gradient(to bottom,#000 74%,transparent 99%)}
-@media (max-width:1020px){.hero .sub{max-width:34ch}}
+@media (max-width:1100px) and (min-width:760px){.hero .sub{max-width:30ch}.hero .actions{flex-direction:column;align-items:flex-start}.hero-grid{column-gap:16px}}
 @media (max-width:759px){
   .hero-grid{grid-template-columns:minmax(0,1fr);min-height:0}
   .hero-team{display:none}
