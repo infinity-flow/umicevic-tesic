@@ -183,19 +183,21 @@ main > .fear{background:linear-gradient(to bottom,transparent 50%,var(--paper) 5
 @media (max-width:980px){.svc-grid{grid-template-columns:1fr}.svc-intro{position:static}}
 @media (max-width:640px){.svc-list{grid-template-columns:1fr}.svc-list li:nth-last-child(2) a{border-bottom:0}}
 
-/* Office */
-.office{position:relative}
-.office figure{height:clamp(420px,62vw,760px);overflow:hidden;background:var(--mint)}
-.office figure img{width:100%;height:100%;object-fit:cover;object-position:50% 22%}
-.comforts{position:relative;margin-top:-180px;z-index:2}
-.comforts .panel{background:#fff;border-radius:32px;padding:clamp(28px,4vw,56px);display:grid;grid-template-columns:minmax(0,.8fr) minmax(0,1.2fr);gap:clamp(28px,4vw,64px);box-shadow:0 30px 60px -36px rgba(29,43,42,.35)}
-.comforts ul{list-style:none;display:grid;grid-template-columns:1fr 1fr;gap:24px 32px}
-.comforts li{display:grid;grid-template-columns:28px 1fr;gap:12px;align-items:start}
-.comforts li svg{width:24px;height:24px;color:var(--deep);margin-top:2px}
-.comforts li b{display:block;font-weight:700}
-.comforts li span{font-size:.94rem;color:var(--ink-2)}
-@media (max-width:880px){.comforts{margin-top:-90px}.comforts .panel{grid-template-columns:1fr}}
-@media (max-width:560px){.comforts ul{grid-template-columns:1fr}}
+/* Office: same language as the fear block, light version, photo right */
+.office{padding:clamp(80px,10vw,140px) 0}
+.office-grid{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:clamp(40px,6vw,96px);align-items:center}
+.office-copy h2{max-width:13ch}
+.office-copy > p{margin-top:16px;color:var(--ink-2);max-width:42ch}
+.perks{list-style:none;margin-top:clamp(28px,3vw,40px)}
+.perks li{display:grid;grid-template-columns:44px minmax(0,1fr);gap:16px;align-items:start;padding:20px 0;border-top:1px solid var(--line)}
+.perks li:last-child{border-bottom:1px solid var(--line)}
+.perks .ic{width:44px;height:44px;border-radius:50%;background:var(--mint);color:var(--deep);display:grid;place-items:center}
+.perks .ic svg{width:22px;height:22px}
+.perks b{display:block;font-family:var(--display);font-weight:400;font-size:1.35rem;line-height:1.2;color:var(--ink)}
+.perks span{display:block;margin-top:4px;font-size:.95rem;color:var(--ink-2)}
+.office-photo{margin:0;border-radius:28px;overflow:hidden;aspect-ratio:4/5;background:var(--mint)}
+.office-photo img{width:100%;height:100%;object-fit:cover;object-position:62% 30%}
+@media (max-width:880px){.office-grid{grid-template-columns:1fr}.office-photo{aspect-ratio:4/3;order:-1}}
 
 /* Reviews: GSAP infinite card slider */
 .reviews{padding:clamp(80px,10vw,140px) 0;overflow:hidden}
@@ -412,19 +414,20 @@ footer{padding:40px 0 48px;font-size:.92rem;color:var(--ink-2)}
 </section>
 
 <section class="office" id="ordinacija" aria-labelledby="office-title">
-  <figure><img loading="lazy" src="https://umicevictesic.com/assets/img/services/naslovna-003.jpg" alt="Doktorka i sestra tokom pregleda pacijenta u ordinaciji" width="1920" height="1080"></figure>
-  <div class="wrap comforts">
-    <div class="panel">
-      <div>
-        <h2 id="office-title">Male stvari koje prave razliku.</h2>
-      </div>
-      <ul>
-        <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg><p><b>Bez čekanja</b><span>Primamo isključivo po zakazanim terminima.</span></p></li>
-        <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M17 8h1a4 4 0 0 1 0 8h-1"/><path d="M3 8h14v8a5 5 0 0 1-5 5H8a5 5 0 0 1-5-5z"/></svg><p><b>Kafa i tiha čekaonica</b><span>Klimatizovano, mirno, uz muziku i vodu.</span></p></li>
-        <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 20 14 10"/><path d="M14 10l2-2 4 4-2 2z"/><path d="M15 5l1 1M18 4l1 1M20 7l1 1"/></svg><p><b>Četkica na poklon</b><span>Niste stigli da operete zube? Čeka vas četkica i prostor za to.</span></p></li>
-        <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="4" y="3" width="16" height="18" rx="3"/><path d="M10 16V8h3a2.5 2.5 0 0 1 0 5h-3"/></svg><p><b>Parking u blizini</b><span>Deo grada sa manje gužve, lako i gradskim prevozom.</span></p></li>
+  <div class="wrap office-grid">
+    <div class="office-copy">
+      <h2 id="office-title">Male stvari koje prave razliku.</h2>
+      <p>Pregled počinje pre nego što sednete u stolicu. Zato smo se potrudili da vam od ulaska bude prijatno.</p>
+      <ul class="perks">
+        <li><span class="ic" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg></span><p><b>Bez čekanja</b><span>Primamo isključivo po zakazanim terminima.</span></p></li>
+        <li><span class="ic" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 8h1a4 4 0 0 1 0 8h-1"/><path d="M3 8h14v8a5 5 0 0 1-5 5H8a5 5 0 0 1-5-5z"/></svg></span><p><b>Kafa i tiha čekaonica</b><span>Klimatizovano i mirno, uz muziku i vodu.</span></p></li>
+        <li><span class="ic" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 20 14 10"/><path d="M14 10l2-2 4 4-2 2z"/><path d="M15 5l1 1M18 4l1 1M20 7l1 1"/></svg></span><p><b>Četkica na poklon</b><span>Niste stigli da operete zube? Čeka vas četkica i prostor za to.</span></p></li>
+        <li><span class="ic" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="3" width="16" height="18" rx="3"/><path d="M10 16V8h3a2.5 2.5 0 0 1 0 5h-3"/></svg></span><p><b>Parking u blizini</b><span>Deo grada sa manje gužve, lako i gradskim prevozom.</span></p></li>
       </ul>
     </div>
+    <figure class="office-photo">
+      <img loading="lazy" src="https://umicevictesic.com/assets/img/services/naslovna-003.jpg" alt="Doktorka i sestra tokom pregleda pacijenta u ordinaciji" width="1920" height="1080">
+    </figure>
   </div>
 </section>
 
