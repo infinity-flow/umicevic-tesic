@@ -22,7 +22,7 @@ Strana ne prodaje "stomatologiju", nego mir. Sve gradimo od njihovih pravih foto
 3. Tim: pet portreta u nizu, po jedna rečenica svake
 4. Usluge: tipografski indeks, sitne slike samo kao male kružne sličice
 5. Ordinacija: velika fotografija rada + sitnice (kafa, četkice, parking, tiha čekaonica)
-6. Kontakt: zelena #0A6B63 sa belim tekstom, radno vreme sa "danas"
+6. Kontakt: blok u marginama, fotografija pregleda sa tamnim #1D2B2A overlayem, forma + kartica radnog vremena
 
 ## Zabrane
 Bez ALL CAPS natpisa iznad naslova, bez kartica sa senkom za sve, bez strelica u linkovima,
