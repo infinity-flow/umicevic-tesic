@@ -17,7 +17,7 @@ Strana ne prodaje "stomatologiju", nego mir. Sve gradimo od njihovih pravih foto
 - Manrope: tekst, dugmad, brojevi i navigacija
 
 ## Raspored
-1. Hero: naslov "strah ostaje na vratima" + timska fotografija ispred vrata ordinacije
+1. Hero: naslov u dva reda (drugi red tirkizno-tamni) + izdvojena fotografija tima bez pozadine, sa blagim nestajanjem pri dnu; na telefonu bez slike
 2. Merač straha (jedini "glasni" element): pacijent bira koliko se plaši, ordinacija odgovara konkretnim činjenicama + pravi utisak pacijenta
 3. Tim: pet portreta u nizu, po jedna rečenica svake
 4. Usluge: tipografski indeks, sitne slike samo kao male kružne sličice
