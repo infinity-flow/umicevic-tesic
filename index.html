@@ -203,10 +203,10 @@ main > .fear{background:linear-gradient(to bottom,transparent 50%,var(--paper) 5
 .tslider{--cw:clamp(280px,42vw,560px);--ch:clamp(330px,26vw,360px);position:relative;overflow:hidden;height:calc(var(--ch) + 48px);margin-top:clamp(36px,4vw,56px);touch-action:pan-y;user-select:none;-webkit-user-select:none;cursor:grab}
 .tslider:active{cursor:grabbing}
 .tcards{list-style:none}
-.tcard{position:absolute;top:24px;left:50%;width:var(--cw);height:var(--ch);margin-left:calc(var(--cw) / -2);display:flex;flex-direction:column;justify-content:space-between;padding:clamp(28px,3vw,44px);background:#fff;border:2px solid var(--line);border-radius:28px;will-change:transform,opacity}
-.tcard blockquote{font-family:var(--display);font-size:clamp(1.2rem,1.7vw,1.5rem);line-height:1.36;color:var(--ink);text-wrap:pretty}
-.tcard cite{font-style:normal;font-weight:700;font-size:.95rem;color:var(--ink)}
-.tcard cite span{display:block;font-weight:500;color:var(--muted)}
+.tcard{position:absolute;top:24px;left:50%;width:var(--cw);height:var(--ch);margin-left:calc(var(--cw) / -2);display:flex;flex-direction:column;justify-content:space-between;padding:clamp(28px,3vw,44px);background:var(--ink);border:0;border-radius:28px;will-change:transform,opacity}
+.tcard blockquote{font-family:var(--display);font-size:clamp(1.2rem,1.7vw,1.5rem);line-height:1.36;color:#fff;text-wrap:pretty}
+.tcard cite{font-style:normal;font-weight:700;font-size:.95rem;color:#fff}
+.tcard cite span{display:block;font-weight:500;color:rgba(255,255,255,.72)}
 .tnav{display:flex;justify-content:center;gap:14px;margin-top:clamp(20px,3vw,32px)}
 .tnav button{width:56px;height:56px;border-radius:50%;border:2px solid var(--ink);background:transparent;color:var(--ink);display:grid;place-items:center;cursor:pointer;transition:background-color .2s,color .2s,transform .1s ease-out}
 .tnav button:hover{background:var(--ink);color:#fff}
@@ -693,8 +693,8 @@ footer{padding:40px 0 48px;font-size:.92rem;color:var(--ink-2)}
 
     const animateFunc = el => {
       const tl = gsap.timeline();
-      tl.fromTo(el, { scale: 0, opacity: 0, borderColor: '#E2E2E2' },
-                    { scale: 1, opacity: 1, borderColor: '#0A6B63', zIndex: 100, duration: 0.5, yoyo: true, repeat: 1, ease: 'none', immediateRender: false })
+      tl.fromTo(el, { scale: 0, opacity: 0 },
+                    { scale: 1, opacity: 1, zIndex: 100, duration: 0.5, yoyo: true, repeat: 1, ease: 'none', immediateRender: false })
         .fromTo(el, { xPercent: 300 }, { xPercent: -300, duration: 1, ease: 'none', immediateRender: false }, 0);
       return tl;
     };
