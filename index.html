@@ -85,6 +85,9 @@ footer .wordmark{height:26px}
 .hero-copy{grid-column:1;grid-row:2;align-self:start}
 .hero .sub{margin-top:24px;font-size:1rem;line-height:1.6;color:var(--ink-2);max-width:40ch}
 .hero .actions{display:flex;flex-wrap:wrap;gap:12px;margin-top:32px}
+.hero-stats{display:flex;gap:clamp(24px,3vw,44px);margin-top:36px;padding-top:28px;border-top:1px solid var(--line)}
+.hero-stats dd{font-family:var(--display);font-size:clamp(1.9rem,2.6vw,2.5rem);line-height:1;color:var(--ink);font-variant-numeric:lining-nums tabular-nums;white-space:nowrap}
+.hero-stats dd span{display:block;margin-top:8px;max-width:12ch;font-family:var(--text);font-size:.88rem;line-height:1.35;color:var(--muted);white-space:normal}
 /* image starts at ~the middle of the second headline line and fills the column to the right margin */
 .hero-team{grid-column:2;grid-row:1 / 3;align-self:start;margin:calc(var(--h1) * 1.02 * 1.45) 0 0;width:100%}
 .hero-team img{display:block;width:100%;height:auto;max-height:calc(100svh - 76px - 96px - var(--h1) * 1.479 - clamp(40px,6vh,96px));object-fit:contain;object-position:right top}
@@ -100,7 +103,7 @@ footer .wordmark{height:26px}
 @media (prefers-reduced-motion:no-preference){
   .hero h1 .ln{opacity:0;transform:translateY(.3em);animation:rise .9s cubic-bezier(.16,1,.3,1) forwards}
   .hero h1 .ln-2{animation-delay:.1s}
-  .hero .sub,.hero .actions{opacity:0;animation:fade .8s ease .3s forwards}
+  .hero .sub,.hero .actions,.hero-stats{opacity:0;animation:fade .8s ease .3s forwards}
   .hero-team img{opacity:0;transform:translateY(24px);animation:rise 1.2s cubic-bezier(.16,1,.3,1) .15s forwards}
 }
 @keyframes rise{to{opacity:1;transform:none}}
@@ -286,6 +289,11 @@ footer{padding:40px 0 48px;font-size:.92rem;color:var(--ink-2)}
         </a>
         <a class="btn btn-line" href="#strah">Plašite se zubara?</a>
       </div>
+      <dl class="hero-stats">
+        <div><dt class="sr-only">Zadovoljnih pacijenata</dt><dd><b data-count="1354">1.354</b>+<span aria-hidden="true">Zadovoljnih pacijenata</span></dd></div>
+        <div><dt class="sr-only">Popravljenih zuba</dt><dd><b data-count="12589">12.589</b>+<span aria-hidden="true">Popravljenih zuba</span></dd></div>
+        <div><dt class="sr-only">Godina iskustva</dt><dd><b data-count="10">10</b>+<span aria-hidden="true">Godina iskustva</span></dd></div>
+      </dl>
     </div>
     <figure class="hero-team">
       <picture>
@@ -561,6 +569,16 @@ footer{padding:40px 0 48px;font-size:.92rem;color:var(--ink-2)}
     ans.classList.remove('swap'); void ans.offsetWidth; ans.classList.add('swap');
     ans.innerHTML = `<h3>${a.t}</h3><p>${a.p}</p>`;
   });
+
+  // Hero stats: count up once on load
+  if (window.gsap && !matchMedia('(prefers-reduced-motion: reduce)').matches) {
+    const fmt = new Intl.NumberFormat('sr-RS');
+    document.querySelectorAll('.hero-stats [data-count]').forEach((el, i) => {
+      const o = { v: 0 }, end = +el.dataset.count;
+      gsap.to(o, { v: end, duration: 1.6, delay: 0.4 + i * 0.1, ease: 'power2.out',
+        onUpdate: () => { el.textContent = fmt.format(Math.round(o.v)); } });
+    });
+  }
 
   // Testimonials: GSAP infinite card slider (seamless loop technique from GreenSock's demo)
   (function testimonials() {
