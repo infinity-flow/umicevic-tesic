@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Umićević Tešić | Stomatološka ordinacija, Klisa, Novi Sad</title>
 <meta name="description" content="Stomatološka ordinacija na Klisi u Novom Sadu. Tri doktorke, dve sestre i više od deset godina rada sa pacijentima koji se plaše zubara.">
-<script>document.documentElement.classList.add('js');setTimeout(()=>document.documentElement.classList.add('hero-in'),2500)</script>
+<script>document.documentElement.classList.add('js');setTimeout(()=>{const h=document.documentElement;h.classList.add('hero-in');setTimeout(()=>h.classList.add('hero-done'),1600)},2500)</script>
 <meta name="theme-color" content="#F7F7F7">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -791,11 +791,9 @@ footer a:not(.btn):hover{color:var(--deep)}
   const startHero = () => {
     const html = document.documentElement;
     if (html.classList.contains('hero-in')) return;
-    requestAnimationFrame(() => {
-      html.classList.add('hero-in');
-      countUp();
-      setTimeout(() => html.classList.add('hero-done'), 1600);
-    });
+    html.classList.add('hero-in');
+    countUp();
+    setTimeout(() => html.classList.add('hero-done'), 1600);
   };
   Promise.race([document.fonts ? document.fonts.ready : Promise.resolve(), new Promise(r => setTimeout(r, 1200))]).then(startHero);
 
