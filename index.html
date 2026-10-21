@@ -184,15 +184,30 @@ main > .fear{background:linear-gradient(to bottom,transparent 50%,var(--paper) 5
 @media (max-width:880px){.comforts{margin-top:-90px}.comforts .panel{grid-template-columns:1fr}}
 @media (max-width:560px){.comforts ul{grid-template-columns:1fr}}
 
-/* Reviews */
-.reviews{padding:clamp(80px,10vw,140px) 0}
-.reviews h2{max-width:14ch}
-.review-list{list-style:none;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:clamp(24px,3vw,48px);margin-top:clamp(40px,5vw,64px)}
-.review-list li{padding-top:28px;border-top:2px solid var(--teal);display:flex;flex-direction:column}
-.review-list blockquote{font-family:var(--display);font-size:clamp(1.35rem,1.8vw,1.6rem);line-height:1.32;color:var(--ink);text-wrap:pretty}
-.review-list cite{margin-top:20px;font-style:normal;font-weight:700;font-size:.95rem;color:var(--ink)}
-.review-list cite span{display:block;font-weight:500;color:var(--muted)}
-@media (max-width:880px){.review-list{grid-template-columns:1fr}}
+/* Reviews: GSAP infinite card slider */
+.reviews{padding:clamp(80px,10vw,140px) 0;overflow:hidden}
+.reviews h2{text-align:center}
+.tslider{--cw:clamp(280px,42vw,560px);--ch:clamp(330px,26vw,360px);position:relative;overflow:hidden;height:calc(var(--ch) + 48px);margin-top:clamp(36px,4vw,56px);touch-action:pan-y;user-select:none;-webkit-user-select:none;cursor:grab}
+.tslider:active{cursor:grabbing}
+.tcards{list-style:none}
+.tcard{position:absolute;top:24px;left:50%;width:var(--cw);height:var(--ch);margin-left:calc(var(--cw) / -2);display:flex;flex-direction:column;justify-content:space-between;padding:clamp(28px,3vw,44px);background:#fff;border:2px solid var(--line);border-radius:28px;will-change:transform,opacity}
+.tcard blockquote{font-family:var(--display);font-size:clamp(1.2rem,1.7vw,1.5rem);line-height:1.36;color:var(--ink);text-wrap:pretty}
+.tcard .mark{display:block;font-family:var(--display);font-size:3.2rem;line-height:.6;color:var(--teal);margin-bottom:10px}
+.tcard cite{font-style:normal;font-weight:700;font-size:.95rem;color:var(--ink)}
+.tcard cite span{display:block;font-weight:500;color:var(--muted)}
+.tnav{display:flex;justify-content:center;gap:14px;margin-top:clamp(20px,3vw,32px)}
+.tnav button{width:56px;height:56px;border-radius:50%;border:2px solid var(--ink);background:transparent;color:var(--ink);display:grid;place-items:center;cursor:pointer;transition:background-color .2s,color .2s,transform .1s ease-out}
+.tnav button:hover{background:var(--ink);color:#fff}
+.tnav button:active{transform:scale(.94)}
+.tnav svg{width:22px;height:22px}
+.sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
+/* without JS: plain list */
+.tslider:not(.ready){height:auto;cursor:auto}
+.tslider:not(.ready) .tcards{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:20px}
+.tslider:not(.ready) .tcard{position:static;width:auto;margin:0;height:auto;gap:24px}
+.tslider:not(.ready) .tcard[aria-hidden="true"]{display:none}
+.tslider:not(.ready) + .tnav{display:none}
+@media (max-width:640px){.tslider{--cw:78vw;--ch:340px}}
 
 /* Contact */
 .contact{background:#0E8579;color:#fff;padding:clamp(72px,9vw,120px) 0}
@@ -384,21 +399,52 @@ footer{padding:40px 0 48px;font-size:.92rem;color:var(--ink-2)}
 <section class="reviews" id="utisci" aria-labelledby="reviews-title">
   <div class="wrap">
     <h2 id="reviews-title">Rekli su o nama.</h2>
-    <ul class="review-list">
-      <li>
-        <blockquote>„Od kada dolazim kod dr Tešić, više se ne plašim da primim anesteziju. Bol od uboda igle je zaista manji od ujeda komarca, jer doktorka ima vrlo laku ruku.“</blockquote>
-        <cite>Marijana<span>pacijentkinja</span></cite>
-      </li>
-      <li>
-        <blockquote>„Supruga i ja smo imali problem sa našim mlađim sinom i strahom od zubara. Od kada ga vodimo kod doktorke Andree, njegovi strahovi su nestali.“</blockquote>
-        <cite>Petar<span>roditelj</span></cite>
-      </li>
-      <li>
-        <blockquote>„Najviše mi se dopalo što mi je doktorka na vrlo razumljiv način objasnila sve o prevenciji bolesti zuba i kako da pravilno održavam higijenu usta.“</blockquote>
-        <cite>Jovana<span>pacijentkinja</span></cite>
-      </li>
+  <div class="tslider" id="tslider" aria-roledescription="karusel" aria-label="Utisci pacijenata">
+    <ul class="tcards">
+        <li class="tcard" data-i="0">
+          <blockquote><span class="mark" aria-hidden="true">„</span>Od kada dolazim kod dr Tešić, više se ne plašim da primim anesteziju. Bol od uboda igle je zaista manji od ujeda komarca, jer doktorka ima vrlo laku ruku.“</blockquote>
+          <cite>Marijana<span>pacijentkinja</span></cite>
+        </li>
+        <li class="tcard" data-i="1">
+          <blockquote><span class="mark" aria-hidden="true">„</span>Supruga i ja smo imali problem sa našim mlađim sinom i strahom od zubara. Od kada ga vodimo kod doktorke Andree, njegovi strahovi su nestali.“</blockquote>
+          <cite>Petar<span>roditelj</span></cite>
+        </li>
+        <li class="tcard" data-i="2">
+          <blockquote><span class="mark" aria-hidden="true">„</span>Najviše mi se dopalo što mi je doktorka na vrlo razumljiv način objasnila sve o prevenciji bolesti zuba i kako da pravilno održavam higijenu usta.“</blockquote>
+          <cite>Jovana<span>pacijentkinja</span></cite>
+        </li>
+        <li class="tcard" data-i="0" aria-hidden="true">
+          <blockquote><span class="mark" aria-hidden="true">„</span>Od kada dolazim kod dr Tešić, više se ne plašim da primim anesteziju. Bol od uboda igle je zaista manji od ujeda komarca, jer doktorka ima vrlo laku ruku.“</blockquote>
+          <cite>Marijana<span>pacijentkinja</span></cite>
+        </li>
+        <li class="tcard" data-i="1" aria-hidden="true">
+          <blockquote><span class="mark" aria-hidden="true">„</span>Supruga i ja smo imali problem sa našim mlađim sinom i strahom od zubara. Od kada ga vodimo kod doktorke Andree, njegovi strahovi su nestali.“</blockquote>
+          <cite>Petar<span>roditelj</span></cite>
+        </li>
+        <li class="tcard" data-i="2" aria-hidden="true">
+          <blockquote><span class="mark" aria-hidden="true">„</span>Najviše mi se dopalo što mi je doktorka na vrlo razumljiv način objasnila sve o prevenciji bolesti zuba i kako da pravilno održavam higijenu usta.“</blockquote>
+          <cite>Jovana<span>pacijentkinja</span></cite>
+        </li>
+        <li class="tcard" data-i="0" aria-hidden="true">
+          <blockquote><span class="mark" aria-hidden="true">„</span>Od kada dolazim kod dr Tešić, više se ne plašim da primim anesteziju. Bol od uboda igle je zaista manji od ujeda komarca, jer doktorka ima vrlo laku ruku.“</blockquote>
+          <cite>Marijana<span>pacijentkinja</span></cite>
+        </li>
+        <li class="tcard" data-i="1" aria-hidden="true">
+          <blockquote><span class="mark" aria-hidden="true">„</span>Supruga i ja smo imali problem sa našim mlađim sinom i strahom od zubara. Od kada ga vodimo kod doktorke Andree, njegovi strahovi su nestali.“</blockquote>
+          <cite>Petar<span>roditelj</span></cite>
+        </li>
+        <li class="tcard" data-i="2" aria-hidden="true">
+          <blockquote><span class="mark" aria-hidden="true">„</span>Najviše mi se dopalo što mi je doktorka na vrlo razumljiv način objasnila sve o prevenciji bolesti zuba i kako da pravilno održavam higijenu usta.“</blockquote>
+          <cite>Jovana<span>pacijentkinja</span></cite>
+        </li>
     </ul>
   </div>
+  </div>
+  <div class="tnav">
+    <button type="button" id="tprev" aria-label="Prethodni utisak"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M19 12H5M11 18l-6-6 6-6"/></svg></button>
+    <button type="button" id="tnext" aria-label="Sledeći utisak"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></button>
+  </div>
+  <p class="sr-only" id="tstatus" aria-live="polite"></p>
 </section>
 
 <section class="contact" id="kontakt" aria-labelledby="contact-title">
@@ -453,6 +499,8 @@ footer{padding:40px 0 48px;font-size:.92rem;color:var(--ink-2)}
 </footer>
 
 
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/Draggable.min.js"></script>
 <script>
 (() => {
   document.getElementById('year').textContent = new Date().getFullYear();
@@ -514,6 +562,79 @@ footer{padding:40px 0 48px;font-size:.92rem;color:var(--ink-2)}
     ans.classList.remove('swap'); void ans.offsetWidth; ans.classList.add('swap');
     ans.innerHTML = `<h3>${a.t}</h3><p>${a.p}</p>`;
   });
+
+  // Testimonials: GSAP infinite card slider (seamless loop technique from GreenSock's demo)
+  (function testimonials() {
+    const slider = document.getElementById('tslider');
+    if (!window.gsap || !slider) return;
+    const cards = gsap.utils.toArray('.tcard', slider);
+    const COUNT = 3, SPACING = 0.15;
+    const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+    gsap.set(cards, { xPercent: 400, opacity: 0, scale: 0 });
+
+    const animateFunc = el => {
+      const tl = gsap.timeline();
+      tl.fromTo(el, { scale: 0, opacity: 0, borderColor: '#D3E4E1' },
+                    { scale: 1, opacity: 1, borderColor: '#16AA9D', zIndex: 100, duration: 0.5, yoyo: true, repeat: 1, ease: 'none', immediateRender: false })
+        .fromTo(el, { xPercent: 300 }, { xPercent: -300, duration: 1, ease: 'none', immediateRender: false }, 0);
+      return tl;
+    };
+
+    function buildSeamlessLoop(items, spacing, animateFunc) {
+      const overlap = Math.ceil(1 / spacing),
+            startTime = items.length * spacing + 0.5,
+            loopTime = (items.length + overlap) * spacing + 1,
+            raw = gsap.timeline({ paused: true }),
+            loop = gsap.timeline({ paused: true, repeat: -1,
+              onRepeat() { this._time === this._dur && (this._tTime += this._dur - 0.01); } }),
+            l = items.length + overlap * 2;
+      for (let i = 0; i < l; i++) {
+        const time = i * spacing;
+        raw.add(animateFunc(items[i % items.length]), time);
+        i <= items.length && loop.add('label' + i, time);
+      }
+      raw.time(startTime);
+      loop.to(raw, { time: loopTime, duration: loopTime - startTime, ease: 'none' })
+          .fromTo(raw, { time: overlap * spacing + 1 },
+                       { time: startTime, duration: startTime - (overlap * spacing + 1), immediateRender: false, ease: 'none' });
+      return loop;
+    }
+
+    const loop = buildSeamlessLoop(cards, SPACING, animateFunc);
+    const wrapTime = gsap.utils.wrap(0, loop.duration());
+    const snap = gsap.utils.snap(SPACING);
+    const playhead = { offset: 0 };
+    const scrub = gsap.to(playhead, { offset: 0, duration: reduce ? 0 : 0.6, ease: 'power3', paused: true,
+      onUpdate() { loop.time(wrapTime(playhead.offset)); } });
+    const status = document.getElementById('tstatus');
+    const names = ['Marijana', 'Petar', 'Jovana'];
+    const go = offset => {
+      scrub.vars.offset = offset; scrub.invalidate().restart();
+      const i = gsap.utils.wrap(0, COUNT, Math.round(offset / SPACING));
+      status.textContent = `Utisak ${i + 1} od ${COUNT}: ${names[i]}`;
+    };
+    loop.time(0);
+    slider.classList.add('ready');
+
+    document.getElementById('tnext').addEventListener('click', () => go(snap(scrub.vars.offset) + SPACING));
+    document.getElementById('tprev').addEventListener('click', () => go(snap(scrub.vars.offset) - SPACING));
+    slider.tabIndex = 0;
+    slider.addEventListener('keydown', e => {
+      if (e.key === 'ArrowRight') { e.preventDefault(); go(snap(scrub.vars.offset) + SPACING); }
+      if (e.key === 'ArrowLeft') { e.preventDefault(); go(snap(scrub.vars.offset) - SPACING); }
+    });
+
+    if (window.Draggable) {
+      gsap.registerPlugin(Draggable);
+      const proxy = document.createElement('div');
+      Draggable.create(proxy, {
+        type: 'x', trigger: slider, minimumMovement: 6,
+        onPress() { this.startOffset = scrub.vars.offset; this.w = cards[0].offsetWidth || 400; },
+        onDrag() { scrub.vars.offset = this.startOffset + (this.startX - this.x) * SPACING / this.w; scrub.invalidate().restart(); },
+        onDragEnd() { go(snap(scrub.vars.offset)); }
+      });
+    }
+  })();
 })();
 </script>
 </body>
