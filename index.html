@@ -194,13 +194,15 @@ main > .fear{box-shadow:0 -24px 48px -24px rgba(29,43,42,.18)}
 @media (max-width:880px){.review-list{grid-template-columns:1fr}}
 
 /* Contact */
-.contact{background:var(--teal);color:var(--ink);padding:clamp(72px,9vw,120px) 0}
+.contact{background:#0E8579;color:#fff;padding:clamp(72px,9vw,120px) 0}
 .contact-grid{display:grid;grid-template-columns:minmax(0,1.1fr) minmax(0,.9fr);gap:clamp(40px,6vw,96px);align-items:start}
 .contact h2{font-size:clamp(2.5rem,5.4vw,4.5rem);line-height:1;letter-spacing:-.01em}
-.contact .big-tel{display:inline-block;margin-top:28px;font-family:var(--display);font-size:clamp(1.9rem,4vw,3rem);letter-spacing:-.02em;text-decoration:none;border-bottom:3px solid var(--ink);line-height:1.1;font-variant-numeric:tabular-nums}
+.contact .big-tel{display:inline-block;margin-top:28px;font-family:var(--display);font-size:clamp(1.9rem,4vw,3rem);letter-spacing:-.02em;text-decoration:none;border-bottom:3px solid rgba(255,255,255,.55);line-height:1.1;font-variant-numeric:tabular-nums}
 .contact .big-tel:hover{border-bottom-color:#fff}
-.contact .alt{margin-top:18px;font-size:1rem}
-.contact .alt a{font-weight:700;white-space:nowrap}
+.contact .hours{color:var(--ink)}
+.contact :focus-visible{outline-color:#fff}
+.contact .alt{margin-top:18px;font-size:1rem;color:rgba(255,255,255,.92)}
+.contact .alt a{font-weight:700;white-space:nowrap;color:#fff}
 @media (max-width:880px){.contact-grid{grid-template-columns:1fr}}
 .hours{background:rgba(255,255,255,.9);border-radius:28px;padding:clamp(24px,3vw,36px)}
 .hours h3{font-size:1.65rem;margin-bottom:8px}
