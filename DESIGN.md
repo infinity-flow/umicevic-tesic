@@ -13,8 +13,8 @@ Strana ne prodaje "stomatologiju", nego mir. Sve gradimo od njihovih pravih foto
 - Orhideja #A23A78 samo za oznaku "danas" i aktivno stanje merača straha
 
 ## Tipografija
-- Bricolage Grotesque: naslovi, topao i malo neobičan, kao šarene uniforme
-- Atkinson Hyperlegible Next: tekst, pismo napravljeno za čitljivost
+- Fraunces: naslovi (serif, lagan rez 400–500)
+- Manrope: tekst, dugmad, brojevi i navigacija
 
 ## Raspored
 1. Hero: naslov "strah ostaje na vratima" + timska fotografija ispred vrata ordinacije
