@@ -229,28 +229,28 @@ main > .fear{background:linear-gradient(to bottom,transparent 50%,var(--paper) 5
 @media (max-width:640px){.tslider{--cw:78vw;--ch:340px}}
 
 /* Contact */
-.contact{background:var(--paper);color:#fff;padding:0}
-.contact-box{position:relative;overflow:hidden;border-radius:clamp(20px,2.4vw,36px);padding:clamp(40px,6vw,96px) clamp(24px,5vw,80px);background:linear-gradient(rgba(29,43,42,.88),rgba(29,43,42,.8)),url("img/zakazivanje.webp") center 30% / cover no-repeat}
+.contact{background:var(--paper);color:var(--ink);padding:0}
+.contact-box{position:relative;border-radius:clamp(20px,2.4vw,36px);padding:clamp(40px,6vw,96px) clamp(24px,5vw,80px);background:#E5EFEC}
 .contact-grid{display:grid;grid-template-columns:minmax(0,1.1fr) minmax(0,.9fr);gap:clamp(40px,6vw,96px);align-items:start}
 .contact h2{font-size:clamp(2.5rem,5.4vw,4.5rem);line-height:1;letter-spacing:-.01em}
 .contact .hours{color:var(--ink)}
-.contact :focus-visible{outline-color:#fff}
+.contact :focus-visible{outline-color:var(--deep)}
 .cform{display:grid;grid-template-columns:1fr 1fr;gap:16px 16px;margin-top:40px;max-width:640px}
 .cform .full{grid-column:1 / -1}
 .cform label{display:block;margin-bottom:8px;font-weight:700;font-size:.95rem}
-.cform label span{font-weight:500;color:rgba(255,255,255,.75)}
-.cform input,.cform textarea{width:100%;padding:14px 16px;border:2px solid transparent;border-radius:14px;background:rgba(255,255,255,.94);color:var(--ink);font:500 1rem/1.4 var(--text);transition:border-color .2s,background-color .2s}
+.cform label span{font-weight:500;color:var(--muted)}
+.cform input,.cform textarea{width:100%;padding:14px 16px;border:2px solid #fff;border-radius:14px;background:#fff;color:var(--ink);font:500 1rem/1.4 var(--text);transition:border-color .2s,background-color .2s}
 .cform textarea{resize:vertical;min-height:120px}
 .cform input::placeholder,.cform textarea::placeholder{color:#767676}
-.cform input:focus-visible,.cform textarea:focus-visible{outline:none;border-color:#fff;background:#fff;box-shadow:0 0 0 3px rgba(255,255,255,.35)}
-.cform [aria-invalid="true"]{border-color:#FFD2E4}
-.cform .err{margin-top:6px;font-size:.88rem;font-weight:600;color:#FFE3EE;min-height:0}
+.cform input:focus-visible,.cform textarea:focus-visible{outline:none;border-color:var(--deep);box-shadow:0 0 0 3px rgba(10,107,99,.15)}
+.cform [aria-invalid="true"]{border-color:#B42318}
+.cform .err{margin-top:6px;font-size:.88rem;font-weight:600;color:#B42318;min-height:0}
 .cform .err:empty{display:none}
 .form-foot{display:flex;flex-wrap:wrap;align-items:center;gap:16px;margin-top:8px}
-.form-ok{font-weight:600}
+.form-ok{font-weight:600;color:var(--deep)}
 @media (max-width:560px){.cform{grid-template-columns:1fr}}
 @media (max-width:880px){.contact-grid{grid-template-columns:1fr}}
-.hours{background:#fff;border-radius:24px;padding:clamp(24px,2.6vw,32px);box-shadow:0 24px 48px -28px rgba(0,0,0,.35)}
+.hours{background:#fff;border-radius:24px;padding:clamp(24px,2.6vw,32px)}
 .hours h3{font-size:1.5rem;margin-bottom:12px}
 .hours table{width:100%;border-collapse:separate;border-spacing:0;font-variant-numeric:tabular-nums}
 .hours td{padding:12px;font-size:1rem;color:var(--ink)}
@@ -266,8 +266,28 @@ main > .fear{background:linear-gradient(to bottom,transparent 50%,var(--paper) 5
 .hours .info a{text-decoration:none}
 .hours .info a:hover{text-decoration:underline;text-underline-offset:4px}
 
+/* FAQ */
+.faq{padding:var(--space) 0}
+.faq-grid{display:grid;grid-template-columns:minmax(0,.75fr) minmax(0,1.25fr);gap:clamp(32px,6vw,96px);align-items:start}
+.faq-intro p{margin-top:16px;color:var(--ink-2);max-width:34ch}
+.faq-intro a{color:var(--deep);font-weight:700;white-space:nowrap}
+.faq-list details{border-top:1px solid var(--line)}
+.faq-list details:last-child{border-bottom:1px solid var(--line)}
+.faq-list summary{list-style:none;display:flex;justify-content:space-between;align-items:center;gap:24px;padding:24px 0;cursor:pointer;font-family:var(--display);font-size:clamp(1.25rem,1.8vw,1.55rem);line-height:1.25;color:var(--ink)}
+.faq-list summary::-webkit-details-marker{display:none}
+.faq-list summary:hover{color:var(--deep)}
+.faq-list .pm{position:relative;flex:none;width:36px;height:36px;border-radius:50%;background:var(--mint)}
+.faq-list .pm::before,.faq-list .pm::after{content:"";position:absolute;left:50%;top:50%;width:14px;height:2px;margin:-1px 0 0 -7px;background:var(--ink);border-radius:2px;transition:transform .25s ease}
+.faq-list .pm::after{transform:rotate(90deg)}
+.faq-list details[open] .pm::after{transform:rotate(0)}
+.faq-list details[open] .pm{background:var(--deep)}
+.faq-list details[open] .pm::before,.faq-list details[open] .pm::after{background:#fff}
+.faq-list .ans{padding:0 56px 26px 0;color:var(--ink-2);max-width:62ch}
+@media (max-width:880px){.faq-grid{grid-template-columns:1fr}.faq-list .ans{padding-right:0}}
+@media (prefers-reduced-motion:reduce){.faq-list .pm::before,.faq-list .pm::after{transition:none}}
+
 /* Footer */
-footer{position:relative;z-index:1;background:var(--paper);padding:var(--space) 0 28px;font-size:.95rem;color:var(--ink-2)}
+footer{position:relative;z-index:1;background:#fff;border-radius:clamp(20px,2.4vw,36px) clamp(20px,2.4vw,36px) 0 0;padding:var(--space) 0 28px;font-size:.95rem;color:var(--ink-2)}
 .foot-grid{display:grid;grid-template-columns:minmax(0,1.3fr) minmax(0,1fr) minmax(0,.8fr);gap:40px clamp(32px,5vw,80px);align-items:start}
 .foot-brand .logo-link{display:inline-block;color:var(--ink)}
 .foot-brand p{margin-top:18px;max-width:34ch;color:var(--ink-2);line-height:1.6}
@@ -549,6 +569,37 @@ footer a:hover{color:var(--deep)}
   </div></div>
 </section>
 
+<section class="faq" id="pitanja" aria-labelledby="faq-title">
+  <div class="wrap faq-grid">
+    <div class="faq-intro">
+      <h2 id="faq-title">Često postavljana pitanja.</h2>
+      <p>Niste pronašli odgovor? Pozovite nas na <a href="tel:+381638086863">063/808-68-63</a>.</p>
+    </div>
+    <div class="faq-list">
+        <details>
+          <summary>Da li je lečenje bolno?<span class="pm" aria-hidden="true"></span></summary>
+          <p class="ans">Trudimo se da ne bude. Koristimo aspiracione šprice visokog pritiska, pa je i sama anestezija gotovo neosetna, a imamo i više vrsta lekova protiv bolova koje biramo prema vašem slučaju.</p>
+        </details>
+        <details>
+          <summary>Kako da zakažem pregled?<span class="pm" aria-hidden="true"></span></summary>
+          <p class="ans">Pozovite nas na 063/808-68-63 ili 021/641-32-51, pišite na ordinacija@umicevictesic.com ili popunite formu iznad. Primamo isključivo po zakazanim terminima, pa ne čekate u čekaonici.</p>
+        </details>
+        <details>
+          <summary>Da li ću unapred znati cenu tretmana?<span class="pm" aria-hidden="true"></span></summary>
+          <p class="ans">Da. Pre svakog tretmana dobijate tačne informacije o toku i troškovima lečenja, i dovoljno vremena da donesete odluku. Bez sitnih slova i iznenađenja.</p>
+        </details>
+        <details>
+          <summary>Da li radite sa decom?<span class="pm" aria-hidden="true"></span></summary>
+          <p class="ans">Da, dečija i preventivna stomatologija je jedna od naših oblasti. Od prve posete radimo strpljivo, sa zalivanjem fisura i fluorizacijom, kako bi dete i kasnije rado dolazilo na preglede.</p>
+        </details>
+        <details>
+          <summary>Gde se nalazite i ima li parkinga?<span class="pm" aria-hidden="true"></span></summary>
+          <p class="ans">Nalazimo se u ulici Petra Dobrovića 18a na Klisi, u delu grada sa manje gužve. Parking je u blizini, a do nas se lako stiže i gradskim prevozom.</p>
+        </details>
+    </div>
+  </div>
+</section>
+
 </main>
 
 <footer>
@@ -643,6 +694,9 @@ footer a:hover{color:var(--deep)}
   };
   addEventListener('scroll', () => { if (!ticking) { ticking = true; requestAnimationFrame(onScroll); } }, { passive: true });
   header.addEventListener('focusin', () => header.classList.remove('is-hidden'));
+
+  // FAQ: page height changes when an answer opens
+  document.querySelectorAll('.faq-list details').forEach(d => d.addEventListener('toggle', () => { if (window.ScrollTrigger) ScrollTrigger.refresh(); }));
 
   // Mobile menu
   const btn = document.querySelector('.menu-btn'), nav = document.getElementById('main-nav');
