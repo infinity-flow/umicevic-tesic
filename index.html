@@ -5,6 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Umićević Tešić | Stomatološka ordinacija, Klisa, Novi Sad</title>
 <meta name="description" content="Stomatološka ordinacija na Klisi u Novom Sadu. Tri doktorke, dve sestre i više od deset godina rada sa pacijentima koji se plaše zubara.">
+<script>document.documentElement.classList.add('js');setTimeout(()=>document.documentElement.classList.add('hero-in'),2500)</script>
 <meta name="theme-color" content="#F7F7F7">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -106,12 +107,16 @@ html.has-smoother .hero{position:relative}
   .hero .sub{max-width:40ch}
 }
 
-/* Load moment */
+/* Load moment: runs once, after fonts and the hero pin are ready (html.hero-in) */
 @media (prefers-reduced-motion:no-preference){
-  .hero h1 .ln{opacity:0;transform:translateY(.3em);animation:rise .9s cubic-bezier(.16,1,.3,1) forwards}
-  .hero h1 .ln-2{animation-delay:.1s}
-  .hero .sub,.hero .actions,.hero-stats{opacity:0;animation:fade .8s ease .3s forwards}
-  .hero-team img{opacity:0;transform:translateY(24px);animation:rise 1.2s cubic-bezier(.16,1,.3,1) .15s forwards}
+  html.js .hero h1 .ln,html.js .hero .sub,html.js .hero .actions,html.js .hero-stats,html.js .hero-team img{opacity:0}
+  html.js .hero h1 .ln,html.js .hero-team img{transform:translateY(.3em)}
+  html.js .hero-team img{transform:translateY(24px)}
+  html.hero-in .hero h1 .ln{animation:rise .9s cubic-bezier(.16,1,.3,1) forwards}
+  html.hero-in .hero h1 .ln-2{animation-delay:.1s}
+  html.hero-in .hero .sub,html.hero-in .hero .actions,html.hero-in .hero-stats{animation:fade .8s ease .3s forwards}
+  html.hero-in .hero-team img{animation:rise 1.2s cubic-bezier(.16,1,.3,1) .15s forwards}
+  html.hero-done .hero h1 .ln,html.hero-done .hero .sub,html.hero-done .hero .actions,html.hero-done .hero-stats,html.hero-done .hero-team img{opacity:1;transform:none;animation:none}
 }
 @keyframes rise{to{opacity:1;transform:none}}
 @keyframes fade{to{opacity:1}}
@@ -772,14 +777,27 @@ footer a:not(.btn):hover{color:var(--deep)}
   }
 
   // Hero stats: count up once on load
-  if (window.gsap && !matchMedia('(prefers-reduced-motion: reduce)').matches) {
+  const countUp = () => {
+    if (!window.gsap || matchMedia('(prefers-reduced-motion: reduce)').matches) return;
     const fmt = new Intl.NumberFormat('sr-RS');
     document.querySelectorAll('.hero-stats [data-count]').forEach((el, i) => {
       const o = { v: 0 }, end = +el.dataset.count;
       gsap.to(o, { v: end, duration: 1.6, delay: 0.4 + i * 0.1, ease: 'power2.out',
         onUpdate: () => { el.textContent = fmt.format(Math.round(o.v)); } });
     });
-  }
+  };
+
+  // Start the hero entrance once: after web fonts are in and the pin has wrapped the hero
+  const startHero = () => {
+    const html = document.documentElement;
+    if (html.classList.contains('hero-in')) return;
+    requestAnimationFrame(() => {
+      html.classList.add('hero-in');
+      countUp();
+      setTimeout(() => html.classList.add('hero-done'), 1600);
+    });
+  };
+  Promise.race([document.fonts ? document.fonts.ready : Promise.resolve(), new Promise(r => setTimeout(r, 1200))]).then(startHero);
 
   // Testimonials: GSAP infinite card slider (seamless loop technique from GreenSock's demo)
   (function testimonials() {
