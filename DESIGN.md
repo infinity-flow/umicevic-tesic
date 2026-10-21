@@ -18,7 +18,8 @@ Strana ne prodaje "stomatologiju", nego mir. Sve gradimo od njihovih pravih foto
 
 ## Raspored
 1. Hero: naslov u dva reda (drugi red tirkizno-tamni) + izdvojena fotografija tima bez pozadine, sa blagim nestajanjem pri dnu; na telefonu bez slike
-2. Merač straha (jedini "glasni" element): pacijent bira koliko se plaši, ordinacija odgovara konkretnim činjenicama + pravi utisak pacijenta
+2. Merač straha (jedini "glasni" element): 4 nivoa straha, ordinacija odgovara konkretnim činjenicama
+5b. Utisci pacijenata: posebna sekcija pre kontakta, tri citata
 3. Tim: pet portreta u nizu, po jedna rečenica svake
 4. Usluge: tipografski indeks, sitne slike samo kao male kružne sličice
 5. Ordinacija: velika fotografija rada + sitnice (kafa, četkice, parking, tiha čekaonica)
